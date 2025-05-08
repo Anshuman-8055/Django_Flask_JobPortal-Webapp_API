@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/Css/profile.css">
+
+<div class="container mt-5">
+    <h2>{{ current_user.name }}'s Profile</h2>
+
+    <div class="profile-info">
+        <p><strong>Email:</strong> {{ current_user.email }}</p>
+        <a href="{{ url_for('edit_profile') }}" class="btn">Edit Profile</a>
+    </div>
+
+    <div class="resume-section">
+        <h3>Saved Resume</h3>
+        {% if resume %}
+            <h4>Education</h4>
+            <p>{{ resume.education }}</p>
+            <h4>Experience</h4>
+            <p>{{ resume.experience }}</p>
+            <h4>Skills</h4>
+            <p>{{ resume.skills }}</p>
+            <h4>Projects</h4>
+            <p>{{ resume.projects }}</p>
+            <a href="{{ url_for('resume') }}" class="btn">Edit Resume</a>
+            <a href="" class="btn">Download as PDF</a>
+        {% else %}
+            <p>No resume found.</p>
+            <a href="{{ url_for('resume') }}" class="btn">Create Resume</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

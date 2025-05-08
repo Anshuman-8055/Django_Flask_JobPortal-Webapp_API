@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="/static/Css/resume.css">
+
+<div class="container mt-5">
+    <h2>{% if resume %}Edit Your Resume{% else %}Create Your Resume{% endif %}</h2>
+    
+    <form method="POST">
+        <label>Education</label>
+        <textarea name="education" class="form-control" rows="3">{{ resume.education if resume else '' }}</textarea>
+
+        <label>Experience</label>
+        <textarea name="experience" class="form-control" rows="3">{{ resume.experience if resume else '' }}</textarea>
+
+        <label>Skills</label>
+        <textarea name="skills" class="form-control" rows="3">{{ resume.skills if resume else '' }}</textarea>
+
+        <label>Projects</label>
+        <textarea name="projects" class="form-control" rows="3">{{ resume.projects if resume else '' }}</textarea>
+
+        <button type="submit" class="btn btn-primary mt-3">Update resume</button>
+
+        <button type="submit" class="btn btn-primary mt-3"><a href="{{ url_for('user_profile') }}" style="text-decoration: none; color: white;">Save Resume</a></button>
+    </form>
+</div>
+
+{% endblock %}
+s

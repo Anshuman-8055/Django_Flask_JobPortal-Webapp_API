@@ -1,0 +1,28 @@
+    {% extends "base.html" %}
+    {%block content%}
+        <link rel="stylesheet" href="/static/Css/styles.css">
+        <main>
+            <section class="post-job">
+                <h2 class="section-title">Post a Job</h2>
+                <form class="job-form" method="post" action="{{ url_for('post')}}">
+                    <div class="form-group">
+                        <label for="job-title">Job Title</label>
+                        <input type="text" id="job-title" placeholder="Enter job title" name="job_title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company-name">Company Name</label>
+                        <input type="text" id="company-name" placeholder="Enter company name" name="company_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="Enter job location" name="location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-description">Job Description</label>
+                        <textarea id="job-description" placeholder="Enter job description" name="job_description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post Job</button>
+                </form>
+            </section>
+        </main>
+        {% endblock %}

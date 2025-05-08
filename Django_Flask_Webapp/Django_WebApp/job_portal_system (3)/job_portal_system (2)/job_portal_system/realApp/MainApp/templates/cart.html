@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .cart-wrapper {
+        max-width: 960px;
+        margin: 60px auto;
+        padding: 40px;
+        background: linear-gradient(to bottom right, #f8f9fa, #ffffff);
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+        animation: fadeInUp 0.7s ease-in-out;
+    }
+
+    .cart-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 35px;
+        text-align: center;
+        color: #212529;
+        animation: fadeInUp 0.8s ease-in-out;
+    }
+
+    .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+        animation: fadeInUp 1s ease-in-out;
+    }
+
+    .cart-table th,
+    .cart-table td {
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+        transition: background 0.3s ease;
+    }
+
+    .cart-table th {
+        background: #e9ecef;
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .cart-table tr:hover {
+        background-color: #f1f3f5;
+        transition: 0.3s ease;
+    }
+
+    .btn-remove {
+        background-color: #ff6b6b;
+        color: #fff;
+        font-size: 0.875rem;
+        padding: 6px 14px;
+        border-radius: 6px;
+        transition: transform 0.2s, background 0.3s ease;
+    }
+
+    .btn-remove:hover {
+        background-color: #e03131;
+        transform: scale(1.05);
+    }
+
+    .cart-footer {
+        margin-top: 35px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        animation: fadeInUp 1.2s ease-in-out;
+    }
+
+    .btn-checkout,
+    .btn-continue {
+        border: none;
+        padding: 12px 28px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-checkout {
+        background-color: #51cf66;
+        color: #fff;
+    }
+
+    .btn-checkout:hover {
+        background-color: #2b8a3e;
+        transform: scale(1.05);
+        box-shadow: 0 6px 18px rgba(0, 128, 0, 0.2);
+    }
+
+    .btn-continue {
+        background-color: #339af0;
+        color: #fff;
+    }
+
+    .btn-continue:hover {
+        background-color: #1c7ed6;
+        transform: scale(1.05);
+        box-shadow: 0 6px 18px rgba(0, 102, 204, 0.2);
+    }
+
+    .alert-info {
+        animation: fadeInUp 1s ease-in-out;
+    }
+
+    @media (max-width: 576px) {
+        .cart-footer {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .cart-table th,
+        .cart-table td {
+            font-size: 0.95rem;
+        }
+    }
+</style>
+
+<div class="cart-wrapper">
+    <div class="cart-title">Your Saved Jobs</div>
+
+    {% if cart.jobs.exists %}
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Category</th>
+                    <th>Date Posted</th>
+                    <th class="text-center">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in cart.jobs.all %}
+                <tr>
+                    <td>{{ product.job_title }}</td>
+                    <td>{{ product.get_category_display }}</td>
+                    <td>{{ product.pub_date }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'remove_from_cart' product.job_id %}" class="btn btn-remove">
+                            Remove
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="cart-footer">
+            <a href="{% url 'dashboard' %}" class="btn btn-continue">Continue Browsing</a>
+            <a href="{% url 'place_order' %}" class="btn btn-checkout">Apply to All</a>
+        </div>
+    {% else %}
+        <p class="alert alert-info text-center mb-4">You haven’t saved any jobs yet.</p>
+        <div class="text-center">
+            <a href="{% url 'dashboard' %}" class="btn btn-continue">Browse Jobs</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

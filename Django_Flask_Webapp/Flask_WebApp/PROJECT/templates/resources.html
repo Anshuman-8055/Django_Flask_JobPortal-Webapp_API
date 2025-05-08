@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{%block content%}
+<link rel="stylesheet" href="/static/Css/styles.css">
+    <main>
+        <section class="resources">
+            <h2 class="section-title">Career Resources</h2>
+            <div class="resource-cards">
+                <div class="resource-card">
+                    <h3>Resume Writing Tips</h3>
+                    <p>Learn how to craft a professional resume that stands out to employers.</p>
+                    <a href="{{ url_for('resume_tips') }}" class="btn btn-primary">Read More</a>
+                </div>
+                <div class="resource-card">
+                    <h3>Interview Preparation</h3>
+                    <p>Get ready for your next interview with our comprehensive guide.</p>
+                    <a href="{{ url_for('interview_prep') }}" class="btn btn-primary">Read More</a>
+                </div>
+                <div class="resource-card">
+                    <h3>Career Growth</h3>
+                    <p>Discover strategies to advance your career and achieve your goals.</p>
+                    <a href="{{ url_for('career_growth') }}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+  {% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-3 mb-2">
+  <h2 class="text-center">Welcome to Our JobVerse!</h2>
+  <p class="text-center">Browse our wide selection of Jobs and Internships.</p>
+
+  <!-- Category Section -->
+  <section class="categories container section py-5">
+    <h3 class="section__title text-center mb-4" data-aos="fade-up">
+      Explore <span class="text-primary">Popular Categories</span>
+    </h3>
+    <div class="swiper categories__container">
+      <div class="swiper-wrapper">
+        {% for key, value in category_choices %}
+          <a href="{% url 'category_filter' key %}" class="category__item swiper-slide text-center p-4 border rounded shadow-sm">
+
+            <h5 class="fw-semibold text-dark">{{ value }}</h5>
+          </a>
+        {% endfor %}
+      </div>
+
+      <div class="swiper-button-prev"><i class="fi fi-rs-angle-left"></i></div>
+      <div class="swiper-button-next"><i class="fi fi-rs-angle-right"></i></div>
+    </div>
+  </section>
+
+  <!-- Jobs Listing Section -->
+  <div class="category-jobs-container my-3 container">
+    <h2 class="text-center text-primary">{{ category_name }} Jobs</h2>
+
+    {% if jobs %}
+      <div class="jobs__container grid">
+        {% for job in jobs %}
+          <div class="job__item p-3 border rounded shadow-sm text-center">
+            <div class="job__banner mb-2">
+              <a href="{% url 'jobs_detail' job.job_id %}" class="job__images d-block mb-2">
+                <!-- Placeholder for job image if needed -->
+              </a>
+              <div class="job__actions">
+                <a href="{% url 'jobs_detail' job.job_id %}" class="action__btn" aria-label="Quick View">
+                  <i class="fi fi-rs-eye"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="job__content">
+              <span class="job__category d-block mb-1">{{ job.get_category_display }}</span>
+              <a href="{% url 'jobs_detail' job.job_id %}">
+                <h5 class="job__title fw-semibold">{{ job.job_title }}</h5>
+              </a>
+
+
+              <p class="job__price mb-2">Posted on: {{ job.pub_date }}</p>
+
+              <a href="{% url 'add_to_cart' job.job_id %}" class="btn btn-outline-primary">
+                <i class="fi fi-rs-bookmark"></i> Save Job
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center mt-4 text-muted">No jobs found in this category.</p>
+    {% endif %}
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{% url 'dashboard' %}" class="btn btn-primary">Go To Home</a>
+  </div>
+</div>
+{% endblock content %}

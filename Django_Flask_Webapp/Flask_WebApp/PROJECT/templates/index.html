@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{%block content%}
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Find Your Dream Job Today</h1>
+                <p>Discover thousands of job opportunities with all the information you need to advance your career.</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Job title or keyword">
+                    <input type="text" placeholder="Location">
+                    <button class="btn btn-primary">Search Jobs</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-jobs">
+            <h2 class="section-title">Featured Jobs</h2>
+            <div class="jobs-grid">
+                <div class="job-card">
+                    <h3>Senior Software Engineer</h3>
+                    <div class="company-info">
+                        <p>TechCorp Inc.</p>
+                        <p>San Francisco, CA</p>
+                    </div>
+                    <p class="job-description">Join our team to build innovative solutions using cutting-edge technologies. Work on challenging problems and make a real impact.</p>
+                    <div class="job-tags">
+                        <span class="tag">Full-time</span>
+                        <span class="tag">Remote</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <h3>Product Designer</h3>
+                    <div class="company-info">
+                        <p>Design Studio</p>
+                        <p>New York, NY</p>
+                    </div>
+                    <p class="job-description">Create beautiful and intuitive user experiences for our flagship products. Work closely with product and engineering teams.</p>
+                    <div class="job-tags">
+                        <span class="tag">Full-time</span>
+                        <span class="tag">Hybrid</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <h3>Marketing Manager</h3>
+                    <div class="company-info">
+                        <p>Growth Co.</p>
+                        <p>Austin, TX</p>
+                    </div>
+                    <p class="job-description">Lead our marketing initiatives and drive growth through innovative strategies. Own the entire marketing funnel.</p>
+                    <div class="job-tags">
+                        <span class="tag">Full-time</span>
+                        <span class="tag">On-site</span>
+                        <span class="tag">Marketing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+    

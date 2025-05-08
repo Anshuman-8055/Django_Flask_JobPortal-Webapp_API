@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% block content %}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+    :root {
+        --primary: #6366f1;
+        --primary-hover: #4f46e5;
+        --success: #22c55e;
+        --warning: #eab308;
+        --danger: #ef4444;
+    }
+
+    .manage-orders-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+    }
+
+    .manage-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 3rem;
+        text-align: center;
+        color: #1e293b;
+        position: relative;
+        padding-bottom: 1rem;
+    }
+
+    .manage-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 2px;
+    }
+
+    .order-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+        transition: transform 0.3s ease;
+    }
+
+    .order-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+    }
+
+    .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #f1f5f9;
+    }
+
+    .order-id {
+        font-size: 1.1rem;
+        color: #64748b;
+    }
+
+    .order-id strong {
+        color: #1e293b;
+        font-weight: 600;
+    }
+
+    .status-badge {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        border-radius: 999px;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+
+    .status-pending { background: #ffedd5; color: #c2410c; }
+    .status-reviewed { background: #dbeafe; color: #1d4ed8; }
+    .status-accepted { background: #dcfce7; color: #166534; }
+    .status-rejected { background: #fee2e2; color: #b91c1c; }
+
+    .application-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .detail-card {
+        background: #f8fafc;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        border-left: 4px solid var(--primary);
+    }
+
+    .detail-label {
+        font-size: 0.9rem;
+        color: #64748b;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .detail-value {
+        font-size: 1rem;
+        color: #1e293b;
+        font-weight: 500;
+    }
+
+    .detail-message {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        border: 1px solid #e2e8f0;
+        margin-top: 1rem;
+        line-height: 1.6;
+        color: #475569;
+    }
+
+    .status-form {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 2px solid #f1f5f9;
+    }
+
+    .status-form select {
+        flex: 1;
+        max-width: 300px;
+        padding: 0.75rem 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 0.75rem;
+        background: white;
+        font-size: 1rem;
+    }
+
+    .btn-update {
+        background: var(--primary);
+        color: white;
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-update:hover {
+        background: var(--primary-hover);
+        transform: translateY(-1px);
+    }
+
+    .no-orders {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (max-width: 768px) {
+        .manage-title {
+            font-size: 2rem;
+        }
+        
+        .order-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .status-form {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+</style>
+
+<div class="manage-orders-container">
+    <h1 class="manage-title" data-aos="fade-down">Manage Applications</h1>
+
+    {% for order in orders %}
+        <div class="order-card" data-aos="fade-up">
+            <div class="order-header">
+                <div class="order-id">
+                    <strong>Application #{{ order.id }}</strong> • 
+                    {{ order.user.get_full_name|default:order.user.username }}
+                </div>
+                <div class="status-badge status-{{ order.status|lower }}">
+                    {{ order.get_status_display }}
+                </div>
+            </div>
+
+            <div class="application-details">
+                <div class="detail-card">
+                    <span class="detail-label">Position Applied</span>
+                    <div class="detail-value">{{ order.job.job_title }}</div>
+                </div>
+                
+                <div class="detail-card">
+                    <span class="detail-label">Applicant Email</span>
+                    <div class="detail-value">{{ order.user.email }}</div>
+                </div>
+
+                <div class="detail-card">
+                    <span class="detail-label">Application Date</span>
+                    <div class="detail-value">{{ order.applied_at|date:"M j, Y · h:i A" }}</div>
+                </div>
+            </div>
+
+            <form method="POST" action="{% url 'update_order_status' order.id %}" class="status-form">
+                {% csrf_token %}
+                <select name="status">
+                    {% for key, label in status_choices %}
+                        <option value="{{ key }}" {% if key == order.status %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn-update">
+                    Update Status
+                </button>
+            </form>
+        </div>
+    {% empty %}
+        <div class="no-orders" data-aos="zoom-in">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mx-auto mb-4">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+            <h3 class="text-xl font-semibold text-slate-600 mb-2">No applications found</h3>
+            <p class="text-slate-500">New applications will appear here once submitted by candidates</p>
+        </div>
+    {% endfor %}
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 400,
+        once: true,
+        easing: 'ease-out'
+    });
+</script>
+{% endblock %}

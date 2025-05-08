@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerConnect - Job Portal</title>
+    <link rel="stylesheet" href="/static/Css/theme.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="{{ url_for('home')}}" style="text-decoration: none;">CareerConnect</a></div>
+            <div class="nav-links">
+                <a href="{{ url_for('find_jobs')}}">Find Jobs</a>
+                <a href="{{ url_for('companies')}}">Companies</a>
+                <a href="{{ url_for('resources')}}">Resources</a>
+                <a href="{{ url_for('post_job')}}">Post a Job</a>
+            </div>
+            {% if current_user.is_authenticated %}
+            <button class="btn btn-primary"><a href="{{ url_for('logout')}}"
+                    style="text-decoration: none; color: #fff">Logout</a></button>
+                    <button class="btn btn-primary"><a href="{{ url_for('user_profile')}}"
+                        style="text-decoration: none; color: #fff">User</a></button>
+            {% else %}
+
+            <div class="auth-buttons">
+                <button class="btn btn-outline"> <a href="{{ url_for('login')}}"
+                        style="text-decoration: none;  color: #4338ca">Sign In</a></button>
+                <button class="btn btn-primary"><a href="{{ url_for('register')}}"
+                        style="text-decoration: none; color: #fff">Sign Up</a></button>
+            </div>
+            {% endif %}
+        </nav>
+    </header>
+    {%block content%}
+    {% endblock %}
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>For Job Seekers</h4>
+                <ul class="footer-links">
+                    <li><a href="#browse">Browse Jobs</a></li>
+                    <li><a href="#companies">Browse Companies</a></li>
+                    <li><a href="#salary">Salary Calculator</a></li>
+                    <li><a href="#career">Career Advice</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>For Employers</h4>
+                <ul class="footer-links">
+                    <li><a href="#post">Post a Job</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#talent">Talent Solutions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

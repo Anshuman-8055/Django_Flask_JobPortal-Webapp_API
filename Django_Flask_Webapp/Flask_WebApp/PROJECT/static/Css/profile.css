@@ -1,0 +1,68 @@
+/* static/Css/profile.css */
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative; /* Ensure proper positioning for child elements */
+}
+
+h2, h3, h4 {
+    color: #333;
+}
+
+.profile-info {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.resume-section {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f4f4f4;
+    margin-bottom: 20px; /* Add spacing between sections */
+}
+
+.resume-section h4 {
+    margin-top: 15px;
+    color: #444;
+}
+
+.resume-section p {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border-left: 4px solid #007bff;
+}
+
+.btn {
+    display: inline-block; /* Ensure the button does not overlap */
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Add spacing above the button */
+    text-align: center; /* Center-align text inside the button */
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Add a clearfix to ensure floating elements do not break the layout */
+.container::after {
+    content: "";
+    display: table;
+    clear: both;
+}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{%block content%}
+    <main>
+        <section class="job-listings">
+            <div class="filters">
+                <h2>Filter Jobs</h2>
+                <div class="filter-options">
+                    <select>
+                        <option value="">Job Type</option>
+                        <option value="full-time">Full-time</option>
+                        <option value="part-time">Part-time</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                    <select>
+                        <option value="">Location</option>
+                        <option value="usa">USA</option>
+                        <option value="canada">Canada</option>
+                        <option value="europe">Europe</option>
+                    </select>
+                    <button class="btn btn-primary">Apply Filters</button>
+                </div>
+            </div>
+            <div class="jobs-grid">
+                {% for job in jobs %}
+                <div class="job-card">
+                    <h3>{{job.title}}</h3>
+                    <div class="company-info">
+                        <p>{{job.location}}</p>
+                    </div>
+                    <p class="job-description">{{job.description}}</p>
+                    <div class="job-tags">
+                        <span class="tag">Full-time</span>
+                        <span class="tag">Remote</span>
+                        <span class="tag">React</span>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+<!-- 
+                <div class="job-card">
+                    <h3>Data Scientist</h3>
+                    <div class="company-info">
+                        <p>Data Insights</p>
+                        <p>New York, NY</p>
+                    </div>
+                    <p class="job-description">Join our data team to analyze large datasets and build predictive models using machine learning.</p>
+                    <div class="job-tags">
+                        <span class="tag">Full-time</span>
+                        <span class="tag">On-site</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <h3>UX/UI Designer</h3>
+                    <div class="company-info">
+                        <p>Creative Solutions</p>
+                        <p>San Francisco, CA</p>
+                    </div>
+                    <p class="job-description">Seeking a UX/UI designer with experience in Figma and user research methodologies.</p>
+                    <div class="job-tags">
+                        <span class="tag">Part-time</span>
+                        <span class="tag">Hybrid</span>
+                        <span class="tag">Figma</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <h3>Backend Engineer</h3>
+                    <div class="company-info">
+                        <p>TechNova</p>
+                        <p>Remote</p>
+                    </div>
+                    <p class="job-description">We need an experienced backend engineer to work with Flask and PostgreSQL on scalable systems.</p>
+                    <div class="job-tags">
+                        <span class="tag">Full-time</span>
+                        <span class="tag">Remote</span>
+                        <span class="tag">Flask</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <h3>Marketing Manager</h3>
+                    <div class="company-info">
+                        <p>BrandBoost</p>
+                        <p>Los Angeles, CA</p>
+                    </div>
+                    <p class="job-description">Looking for a marketing manager to develop and implement digital marketing campaigns.</p>
+                    <div class="job-tags">
+                        <span class="tag">Full-time</span>
+                        <span class="tag">On-site</span>
+                        <span class="tag">SEO</span>
+                    </div>
+                </div>
+            </div> -->
+        </section>
+    </main>
+
+ {% endblock %}

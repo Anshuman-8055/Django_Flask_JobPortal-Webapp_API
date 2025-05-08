@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{%block content%}
+<link rel="stylesheet" href="/static/Css/styles.css">
+    <main>
+        <section class="companies-hero">
+            <div class="hero-content">
+                <h1>Explore Top Companies</h1>
+                <p>Discover leading companies and learn about their culture, values, and job opportunities.</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search companies...">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="companies-grid">
+            {% for job in jobs %}
+            <div class="company-card">
+                <div class="company-logo">
+                    <i class="fas fa-building"></i> <!-- Default icon for each company -->
+                </div>
+                <h3>{{ job.company }}</h3> <!-- Company name -->
+                <p class="company-description">{{ job.description }}</p> <!-- Job description -->
+                <div class="company-tags">
+                    <span class="tag">{{ job.location }}</span> <!-- Job location -->
+                </div>
+                <a href="#" class="btn btn-primary">View Jobs</a>
+                <div style="margin-top: 10px;">
+                    <form action="{{ url_for('delete_job', job_id=job.id) }}" method="POST" style="display: inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    <form action="{{ url_for('update_job', job_id=job.id) }}" method="GET" style="display: inline; margin-bottom: 10px; margin-left: 10px;">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+
+            </div>
+
+
+            {% endfor %}
+        </section>
+        
+    </main>
+  
+{% endblock %}
